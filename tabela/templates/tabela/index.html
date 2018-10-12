@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Fudbaleri amateri</title>
+
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'tabela/style.css' %}">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> 
+        <script type="text/javascript" src="{% static '__jquery.tablesorter/jquery.tablesorter.js' %}"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#tabela').tablesorter();
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="container">
+            {% if score %}
+                <div>
+                    <table id="tabela" class="tablesorter">
+                        <thead>
+                            <tr>
+                                <th>Ime</th>
+                                <th>Pobeda</th>
+                                <th>Nerešeno</th>
+                                <th>Poraza</th>
+                                <th>Odigranih</th>
+                                <th>Procenat</th>
+                                <th>Poena</th>
+                                <th>Razlika</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in score %}
+                                <tr>
+                                    <td class="name">{{s.name}}</td>
+                                    <td>{{s.wins}}</td>
+                                    <td>{{s.draws}}</td>
+                                    <td>{{s.losses}}</td>
+                                    <td>{{s.played}}</td>
+                                    <td>{{s.pct}}%</td>
+                                    <td>{{s.points}}</td>
+                                    <td>{{s.diff}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p>Something went wrong.</p>
+            {% endif %}
+        </div>
+
+        <div class="right">
+             <form action = "" method="post">
+                {% csrf_token %}
+                {{ roundSelectForm.as_table }}
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+        </div>
+
+        <div class="rightdown">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Ime</td>
+                        <td>Pobeda</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in roundTable %}
+                        <tr>
+                            <td class="name">{{ r.0 }}</td>
+                            <td>{{ r.1 }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
