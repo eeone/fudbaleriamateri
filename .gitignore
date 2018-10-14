@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+fudbal/__pycache__/
+tabela/__pycache__/
 *.py[cod]
 *$py.class
 
@@ -56,3 +57,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+#projects
+.project/
+.pydevproject/

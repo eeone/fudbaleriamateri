@@ -80,5 +80,46 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="left">
+             <form action = "" method="post">
+                {% csrf_token %}
+                {{ jointScoreForm1.as_table }}
+                <br><br>
+                {{ jointScoreForm2.as_table }}
+                <br><br>
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+        </div>
+
+        <div class="leftdown">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pobeda</th>
+                        <th>Nerešeno</th>
+                        <th>Poraza</th>
+                        <th>Odigranih</th>
+                        <th>Procenat</th>
+                        <th>Poena</th>
+                        <th>Razlika</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in jointScore %}
+                        <tr>
+                            <td>{{s.wins}}</td>
+                            <td>{{s.draws}}</td>
+                            <td>{{s.losses}}</td>
+                            <td>{{s.played}}</td>
+                            <td>{{s.pct}}%</td>
+                            <td>{{s.points}}</td>
+                            <td>{{s.diff}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
     </body>
 </html>
